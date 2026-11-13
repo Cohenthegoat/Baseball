@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b1220">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="PITCHLAB">
+<title>PITCHLAB — Pitching Development</title>
+<style>
+:root{--bg:#0b1220;--panel:#111c2e;--panel2:#17243a;--line:#263750;--text:#eef4ff;--muted:#93a4bc;--blue:#65a9ff;--green:#49d6a0;--amber:#f4bd62;--red:#ff7777}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% -10%,#1b3150 0,transparent 35%),var(--bg);color:var(--text);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.shell{max-width:1240px;margin:auto;padding:22px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px}.brand{display:flex;align-items:center;gap:12px}.mark{width:42px;height:42px;border-radius:13px;background:linear-gradient(145deg,#78baff,#3477d1);display:grid;place-items:center;color:#071323;font-weight:950;font-size:20px;box-shadow:0 8px 24px #397fca44}.brand b{letter-spacing:2px;font-size:17px}.brand small{display:block;color:var(--muted);letter-spacing:1.5px;font-size:10px}.topright{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13px}.pill{border:1px solid var(--line);padding:7px 11px;border-radius:30px;background:#111c2e}
+.layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:22px}.nav{background:#0e1929;border:1px solid var(--line);border-radius:18px;padding:12px;height:max-content;position:sticky;top:15px}.nav button{display:flex;width:100%;border:0;background:transparent;color:var(--muted);padding:12px;border-radius:11px;text-align:left;gap:11px;align-items:center;margin:3px 0}.nav button.active,.nav button:hover{background:#1a2a42;color:var(--text)}.nav .ico{width:20px;text-align:center;color:var(--blue)}.navnote{border-top:1px solid var(--line);margin-top:12px;padding:14px 10px 5px;color:var(--muted);font-size:11px}
+h1{font-size:28px;margin:0 0 5px;letter-spacing:-.7px}h2{font-size:17px;margin:0 0 14px}h3{font-size:14px;margin:0 0 8px}.sub{color:var(--muted);margin:0 0 22px}.section{display:none}.section.active{display:block}.grid{display:grid;gap:14px}.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:16px}.card{background:linear-gradient(160deg,#142238,#101b2c);border:1px solid var(--line);border-radius:17px;padding:17px;min-width:0}.statlabel{color:var(--muted);font-size:12px}.statval{font-size:27px;font-weight:800;letter-spacing:-.8px;margin:6px 0}.statfoot{color:var(--muted);font-size:11px}.blue{color:var(--blue)}.green{color:var(--green)}.amber{color:var(--amber)}.red{color:var(--red)}.two{grid-template-columns:1.15fr .85fr}.three{grid-template-columns:repeat(3,1fr)}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px}.muted{color:var(--muted)}.small{font-size:12px}.tag{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:30px;padding:4px 9px;font-size:11px;color:var(--muted)}.tag.good{color:var(--green);border-color:#276a57}.tag.warn{color:var(--amber);border-color:#73552a}.tag.stop{color:var(--red);border-color:#783d47}
+.btn{border:1px solid var(--line);background:#1b2c44;color:var(--text);padding:10px 13px;border-radius:10px;font-weight:650}.btn.primary{background:var(--blue);color:#071323;border-color:var(--blue)}.btn.ghost{background:transparent}.btn.danger{border-color:#783d47;color:var(--red)}.btn:disabled{opacity:.45;cursor:not-allowed}
+.session{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.session:last-child{border:0}.datebox{width:44px;height:48px;border-radius:10px;background:#203653;display:grid;place-items:center;flex:none;font-size:11px;color:var(--muted)}.datebox b{font-size:17px;color:var(--text);display:block;line-height:1}
+.bar{height:7px;background:#26364d;border-radius:9px;overflow:hidden;margin:8px 0}.bar span{height:100%;display:block;background:linear-gradient(90deg,#4b94ec,#70c2ff);border-radius:9px}.focus{padding:12px;border-radius:12px;background:#192a41;margin:9px 0}.focus b{font-size:13px}.focus p{margin:4px 0 0;color:var(--muted);font-size:12px}
+label{display:block;color:var(--muted);font-size:12px;margin:12px 0 6px}input,select,textarea{width:100%;background:#0c1727;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:11px;outline:none}input:focus,select:focus,textarea:focus{border-color:var(--blue)}input[type=range]{padding:0;accent-color:var(--blue)}.formgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.rangeval{color:var(--blue);font-weight:800}.week{display:grid;grid-template-columns:repeat(7,minmax(110px,1fr));gap:9px;overflow-x:auto;padding-bottom:5px}.day{background:#111e30;border:1px solid var(--line);border-radius:13px;padding:11px;min-height:155px}.day.today{border-color:var(--blue);box-shadow:inset 0 0 0 1px #65a9ff33}.dayname{font-size:11px;color:var(--muted);font-weight:700}.daynum{font-size:19px;font-weight:800;margin:4px 0 10px}.event{background:#1d3551;border-left:3px solid var(--blue);border-radius:6px;padding:7px;margin:6px 0;font-size:11px}.event.recovery{border-color:var(--green);background:#17352f}.event.strength{border-color:var(--amber);background:#382f21}
+.table{width:100%;border-collapse:collapse;font-size:13px}.table th,.table td{text-align:left;padding:11px 8px;border-bottom:1px solid var(--line)}.table th{color:var(--muted);font-weight:600}.empty{color:var(--muted);text-align:center;padding:24px}.chatbox{height:300px;overflow:auto;background:#0c1727;border:1px solid var(--line);border-radius:13px;padding:12px}.bubble{max-width:88%;padding:10px 12px;border-radius:12px;margin:8px 0;font-size:13px;white-space:pre-wrap}.bubble.bot{background:#1a2c43;color:var(--text)}.bubble.user{background:#23548b;margin-left:auto}.chatrow{display:flex;gap:8px;margin-top:10px}.chatrow input{flex:1}.notice{border:1px solid #705a31;background:#302719;color:#f5d7a1;padding:12px;border-radius:12px;font-size:12px;margin:12px 0}.notice.rednotice{border-color:#713e49;background:#301c25;color:#ffc3c3}.foot{margin-top:20px;color:#71839d;font-size:11px;text-align:center}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.nav{position:static;display:flex;overflow-x:auto;gap:3px}.nav button{width:auto;white-space:nowrap}.navnote{display:none}.stats{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr}}
+@media(max-width:560px){.shell{padding:13px}.top{align-items:flex-start}.topright .pill{display:none}h1{font-size:24px}.formgrid,.three{grid-template-columns:1fr}.stats{gap:9px}.card{padding:14px}.statval{font-size:24px}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="top">
+ <div class="brand"><div class="mark">P</div><div><b>PITCHLAB</b><small>PLAYER DEVELOPMENT</small></div></div>
+ <div class="topright"><span class="pill">BETA · VERSION 0.1</span><span id="todayLabel"></span></div>
+</header>
+<div class="layout">
+ <nav class="nav">
+  <button class="active" data-page="home"><span class="ico">▦</span>Overview</button>
+  <button data-page="week"><span class="ico">▤</span>Weekly plan</button>
+  <button data-page="checkin"><span class="ico">◉</span>Daily check-in</button>
+  <button data-page="progress"><span class="ico">↗</span>Progress</button>
+  <button data-page="assistant"><span class="ico">✳</span>Training assistant</button>
+  <div class="navnote">BUILD CONSISTENCY.<br>RESPECT RECOVERY.</div>
+ </nav>
+ <main>
+  <section id="home" class="section active">
+   <h1>Player overview</h1><p class="sub">Your development, one day at a time.</p>
+   <div class="grid stats">
+    <div class="card"><div class="statlabel">LATEST FASTBALL</div><div class="statval"><span id="dashVelo">—</span><small style="font-size:13px"> mph</small></div><div class="statfoot">Most recent logged velocity</div></div>
+    <div class="card"><div class="statlabel">CHECK-INS</div><div class="statval" id="dashChecks">0</div><div class="statfoot">Saved readiness entries</div></div>
+    <div class="card"><div class="statlabel">TRAINING LOGS</div><div class="statval" id="dashLogs">0</div><div class="statfoot">Sessions recorded</div></div>
+    <div class="card"><div class="statlabel">CURRENT STATUS</div><div class="statval" style="font-size:20px" id="dashStatus">Not checked in</div><div class="statfoot">Based on your latest check-in</div></div>
+   </div>
+   <div class="grid two">
+    <div class="card"><div class="row"><h2>Today's plan</h2><span class="tag" id="todayType">TODAY</span></div><div id="todayPlan"></div><button class="btn primary" onclick="showPage('week')">View weekly plan →</button></div>
+    <div class="card"><h2>Development priorities</h2><p class="muted small">Choose the areas you and your coach are currently emphasizing.</p>
+     <div class="focus"><b>01 · Mechanics</b><p>Repeatable delivery, balance, direction and timing.</p></div>
+     <div class="focus"><b>02 · Command</b><p>Track target execution and misses honestly.</p></div>
+     <div class="focus"><b>03 · Strength & movement</b><p>Build general athletic qualities with good coaching.</p></div>
+     <div class="focus"><b>04 · Recovery habits</b><p>Sleep, fueling, hydration and appropriate rest.</p></div>
+    </div>
+   </div>
+   <div class="card" style="margin-top:14px"><div class="row"><h2>This week's schedule</h2><button class="btn ghost" onclick="showPage('week')">See all</button></div><div id="homeWeek"></div></div>
+  </section>
+  <section id="week" class="section">
+   <h1>Weekly training plan</h1><p class="sub">A sample schedule you can edit. Coordinate throwing workload with your coach.</p>
+   <div class="card"><div class="row"><h2>Week at a glance</h2><button class="btn primary" onclick="openAddSession()">+ Add session</button></div><div class="week" id="weekGrid"></div></div>
+   <div class="card" style="margin-top:14px"><h2>All sessions</h2><div id="sessionList"></div></div>
+  </section>
+  <section id="checkin" class="section">
+   <h1>Daily readiness check-in</h1><p class="sub">A quick way to record how you're feeling before training.</p>
+   <div class="grid two">
+    <div class="card">
+     <h2>How are you today?</h2>
+     <label>Energy <span class="rangeval" id="energyVal">3 / 5</span></label><input id="energy" type="range" min="1" max="5" value="3" oninput="rangeText('energy')">
+     <label>Overall fatigue <span class="rangeval" id="fatigueVal">3 / 5</span></label><input id="fatigue" type="range" min="1" max="5" value="3" oninput="rangeText('fatigue')">
+     <label>Muscle soreness <span class="rangeval" id="sorenessVal">2 / 5</span></label><input id="soreness" type="range" min="1" max="5" value="2" oninput="rangeText('soreness')">
+     <label>Sleep last night</label><select id="sleep"><option value="under6">Under 6 hours</option><option value="6to8" selected>6–8 hours</option><option value="8plus">8+ hours</option></select>
+     <label>Any pain while throwing or in your arm/shoulder/elbow?</label><select id="pain"><option value="no">No</option><option value="yes">Yes</option><option value="unsure">Not sure</option></select>
+     <label>Notes (optional)</label><textarea id="checkNotes" rows="2" placeholder="Anything else worth recording?"></textarea>
+     <button class="btn primary" style="width:100%;margin-top:14px" onclick="saveCheckin()">Save check-in</button>
+    </div>
+    <div class="card"><h2>Your check-in guidance</h2><div id="readinessAdvice"><p class="muted">Complete your check-in to see a general readiness reminder.</p></div>
+     <div class="notice rednotice"><b>Important:</b> If you have arm, shoulder, or elbow pain, stop throwing and tell a parent/guardian and coach. Get guidance from a qualified healthcare professional before returning. This app cannot diagnose injuries or clear you to play.</div>
+     <p class="muted small">Readiness scores are self-reported signals, not medical assessments. They do not replace a coach, parent/guardian, or clinician.</p>
+    </div>
+   </div>
+  </section>
+  <section id="progress" class="section">
+   <h1>Progress tracker</h1><p class="sub">Record what happened. Look for trends over time—not one-day changes.</p>
+   <div class="grid two">
+    <div class="card"><h2>Log a result</h2>
+     <label>Metric</label><select id="metric"><option value="Fastball velocity">Fastball velocity (mph)</option><option value="Changeup velocity">Changeup velocity (mph)</option><option value="Squat">Squat (lb)</option><option value="Bench press">Bench press (lb)</option><option value="Command">Command score (%)</option><option value="Other">Other</option></select>
+     <label>Value</label><input id="metricValue" type="number" min="0" step="0.1" placeholder="Enter result">
+     <label>Date</label><input id="metricDate" type="date">
+     <label>Notes</label><input id="metricNotes" placeholder="Conditions, effort, context...">
+     <button class="btn primary" style="width:100%;margin-top:14px" onclick="saveMetric()">Save result</button>
+    </div>
+    <div class="card"><h2>Latest development numbers</h2><div id="latestMetrics"><p class="muted">No results logged yet.</p></div><div class="notice">Compare similar conditions where possible. Never chase a velocity number when tired, sore, or in pain.</div></div>
+   </div>
+   <div class="card" style="margin-top:14px"><h2>History</h2><div id="metricHistory"></div></div>
+  </section>
+  <section id="assistant" class="section">
+   <h1>Training assistant</h1><p class="sub">Ask about your plan, check-in, or training logs.</p>
+   <div class="card">
+    <div class="row"><h2>Pitching development helper</h2><span class="tag warn">BETA · RULE-BASED</span></div>
+    <div id="chat" class="chatbox"><div class="bubble bot">Hey! I can help you review today's plan, understand your check-in, and organize your training notes. I am a basic demo assistant—not a medical professional or a live AI coach. What would you like help with?</div></div>
+    <div class="chatrow"><input id="chatInput" placeholder="Example: I'm tired today. What's on my plan?" onkeydown="if(event.key==='Enter')sendChat()"><button class="btn primary" onclick="sendChat()">Send</button></div>
+    <div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:10px"><button class="btn ghost small" onclick="quickAsk('What is my plan today?')">Today's plan</button><button class="btn ghost small" onclick="quickAsk('Review my latest check-in')">Review check-in</button><button class="btn ghost small" onclick="quickAsk('Show my progress')">My progress</button></div>
+   </div>
+  </section>
+ </main>
+</div>
+<div class="foot">PITCHLAB BETA · Your entries are stored in this browser on this device. Not a medical or coaching service.</div>
+</div>
+<dialog id="sessionDialog" style="background:#111c2e;color:#eef4ff;border:1px solid #263750;border-radius:16px;width:min(440px,92vw);padding:20px">
+ <form method="dialog" id="sessionForm">
+  <div class="row"><h2>Add a training session</h2><button class="btn ghost" value="cancel">✕</button></div>
+  <label>Day</label><select id="newDay"><option value="0">Sunday</option><option value="1">Monday</option><option value="2">Tuesday</option><option value="3">Wednesday</option><option value="4">Thursday</option><option value="5">Friday</option><option value="6">Saturday</option></select>
+  <label>Session title</label><input id="newTitle" required placeholder="e.g. Strength training">
+  <label>Type</label><select id="newType"><option value="strength">Strength</option><option value="throwing">Throwing</option><option value="recovery">Recovery</option><option value="skills">Skills / mechanics</option><option value="other">Other</option></select>
+  <label>Details</label><textarea id="newDetails" rows="3" placeholder="Coach-assigned details, duration, notes..."></textarea>
+  <button class="btn primary" style="width:100%;margin-top:15px" value="save" onclick="addSession(event)">Add session</button>
+ </form>
+</dialog>
+<script>
+const $=id=>document.getElementById(id);
+const dayNames=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const today=new Date(); const todayISO=localDate(today);
+function localDate(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
+function weekStart(d){let x=new Date(d);x.setDate(x.getDate()-x.getDay());x.setHours(0,0,0,0);return x}
+const mondayWeek=weekStart(today);
+function keyWeek(d){return localDate(weekStart(d))}
+const defaultSessions=[
+ {id:1,day:1,title:'Strength training',type:'strength',details:'Coach-guided full-body strength. Keep technique controlled.'},
+ {id:2,day:2,title:'Throwing session',type:'throwing',details:'Only follow your coach-approved throwing plan. Record workload.'},
+ {id:3,day:3,title:'Mobility & recovery',type:'recovery',details:'Easy mobility, normal daily movement, sleep and fueling.'},
+ {id:4,day:4,title:'Pitching skills',type:'skills',details:'Mechanics and command work as assigned by your coach.'},
+ {id:5,day:5,title:'Strength & movement',type:'strength',details:'Coach-guided strength and athletic movement.'},
+ {id:6,day:6,title:'Team practice / game',type:'skills',details:'Coordinate total throwing workload with your coach.'},
+ {id:7,day:0,title:'Rest / reset',type:'recovery',details:'Recovery day. No need to make up missed training.'}
+];
+let data=loadData();
+function loadData(){try{return JSON.parse(localStorage.getItem('pitchlab_v1'))||{sessions:defaultSessions,checks:[],metrics:[]}}catch(e){return {sessions:defaultSessions,checks:[],metrics:[]}}}
+function saveData(){localStorage.setItem('pitchlab_v1',JSON.stringify(data))}
+function showPage(p){document.querySelectorAll('.section').forEach(s=>s.classList.toggle('active',s.id===p));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===p));render();window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
+$('todayLabel').textContent=today.toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'});
+$('metricDate').value=todayISO;
+function sessionsForDay(day){return data.sessions.filter(s=>Number(s.day)===day)}
+function render(){renderHome();renderWeek();renderProgress();renderCheckSummary()}
+function renderHome(){
+ const latestV=[...data.metrics].reverse().find(m=>m.metric==='Fastball velocity');
+ $('dashVelo').textContent=latestV?latestV.value:'—';$('dashChecks').textContent=data.checks.length;$('dashLogs').textContent=data.metrics.length;
+ const c=data.checks[data.checks.length-1];$('dashStatus').textContent=c?(c.pain!=='no'?'Pain flagged':c.fatigue>=4?'High fatigue':c.energy<=2?'Low energy':'Logged'):'Not checked in';
+ const todays=sessionsForDay(today.getDay());
+ $('todayPlan').innerHTML=todays.length?todays.map(s=>`<div class="session"><div class="datebox">TODAY</div><div><b>${esc(s.title)}</b><div class="muted small">${esc(s.details||'No details added')}</div><span class="tag ${s.type==='recovery'?'good':s.type==='strength'?'warn':''}">${esc(s.type)}</span></div></div>`).join(''):'<p class="muted">No sessions scheduled. Use this time as planned rest or add a session.</p>';
+ $('todayType').textContent=todays.length?`${todays.length} SESSION${todays.length>1?'S':''}`:'OPEN DAY';
+ $('homeWeek').innerHTML=dayNames.map((d,i)=>{let a=sessionsForDay(i);return `<div class="session"><div class="datebox">${d.slice(0,3).toUpperCase()}</div><div><b>${a.length?a.map(x=>esc(x.title)).join(', '):'No session scheduled'}</b><div class="muted small">${a.length?a.map(x=>esc(x.type)).join(' · '):'Rest or flexible day'}</div></div></div>`}).join('');
+}
+function renderWeek(){
+ $('weekGrid').innerHTML=dayNames.map((d,i)=>{let list=sessionsForDay(i);let isToday=i===today.getDay();return `<div class="day ${isToday?'today':''}"><div class="dayname">${d.toUpperCase()} ${isToday?'· TODAY':''}</div><div class="daynum">${new Date(mondayWeek.getFullYear(),mondayWeek.getMonth(),mondayWeek.getDate()+i).getDate()}</div>${list.map(s=>`<div class="event ${s.type==='recovery'?'recovery':s.type==='strength'?'strength':''}"><b>${esc(s.title)}</b><br>${esc(s.type)}</div>`).join('')||'<span class="muted small">No session</span>'}</div>`}).join('');
+ $('sessionList').innerHTML=data.sessions.length?data.sessions.slice().sort((a,b)=>a.day-b.day).map(s=>`<div class="session"><div class="datebox">${dayNames[s.day].slice(0,3).toUpperCase()}</div><div style="flex:1"><b>${esc(s.title)}</b><div class="muted small">${esc(s.details||'')}</div><span class="tag">${esc(s.type)}</span></div><button class="btn danger small" onclick="removeSession(${s.id})">Remove</button></div>`).join(''):'<p class="empty">No sessions yet.</p>';
+}
+function openAddSession(){$('sessionDialog').showModal()}
+function addSession(e){e.preventDefault();let title=$('newTitle').value.trim();if(!title)return;data.sessions.push({id:Date.now(),day:+$('newDay').value,title,type:$('newType').value,details:$('newDetails').value.trim()});saveData();$('sessionDialog').close();$('sessionForm').reset();render()}
+function removeSession(id){data.sessions=data.sessions.filter(s=>s.id!==id);saveData();render()}
+function rangeText(id){$(id+'Val').textContent=$(id).value+' / 5'}
+function saveCheckin(){
+ const c={date:todayISO,energy:+$('energy').value,fatigue:+$('fatigue').value,soreness:+$('soreness').value,sleep:$('sleep').value,pain:$('pain').value,notes:$('checkNotes').value.trim()};
+ data.checks.push(c);saveData();renderCheckSummary();renderHome();
+}
+function renderCheckSummary(){
+ let c=data.checks[data.checks.length-1];if(!c)return;
+ let pain=c.pain!=='no';let html='';
+ if(pain)html='<div class="notice rednotice"><b>Stop and get support.</b><p>Do not throw with arm, shoulder, or elbow pain. Tell a parent/guardian and coach, and seek guidance from a qualified healthcare professional. This app cannot clear you to throw.</p></div>';
+ else if(c.fatigue>=4||c.energy<=2||c.soreness>=4||c.sleep==='under6')html='<div class="notice"><b>Recovery deserves attention.</b><p>Share this check-in with your parent/guardian and coach. Ask them to review the planned workload. Do not add extra throwing or intensity to compensate.</p></div>';
+ else html='<span class="tag good">Check-in saved</span><p>Keep following the plan set with your coach. A good check-in is not a reason to add extra throwing.</p>';
+ html+=`<p class="small muted">Latest: energy ${c.energy}/5 · fatigue ${c.fatigue}/5 · soreness ${c.soreness}/5 · ${c.date}</p>`;
+ $('readinessAdvice').innerHTML=html;
+}
+function saveMetric(){let metric=$('metric').value,value=Number($('metricValue').value);if(!Number.isFinite(value)||value<0){alert('Enter a valid non-negative number.');return}data.metrics.push({metric,value,date:$('metricDate').value||todayISO,notes:$('metricNotes').value.trim()});saveData();$('metricValue').value='';$('metricNotes').value='';render()}
+function renderProgress(){
+ const names=[...new Set(data.metrics.map(m=>m.metric))];
+ $('latestMetrics').innerHTML=names.length?names.map(n=>{let m=[...data.metrics].reverse().find(x=>x.metric===n);return `<div class="session"><div style="flex:1"><b>${esc(n)}</b><div class="muted small">${esc(m.date)}</div></div><strong class="blue">${m.value}</strong></div>`}).join(''):'<p class="muted">No results logged yet.</p>';
+ $('metricHistory').innerHTML=data.metrics.length?`<table class="table"><thead><tr><th>Date</th><th>Metric</th><th>Result</th><th>Notes</th></tr></thead><tbody>${data.metrics.slice().reverse().map(m=>`<tr><td>${esc(m.date)}</td><td>${esc(m.metric)}</td><td>${m.value}</td><td>${esc(m.notes||'—')}</td></tr>`).join('')}</tbody></table>`:'<p class="empty">Your saved results will appear here.</p>';
+}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function quickAsk(t){$('chatInput').value=t;sendChat()}
+function addBubble(text,who){let d=document.createElement('div');d.className='bubble '+who;d.textContent=text;$('chat').appendChild(d);$('chat').scrollTop=$('chat').scrollHeight}
+function sendChat(){let q=$('chatInput').value.trim();if(!q)return;addBubble(q,'user');$('chatInput').value='';let l=q.toLowerCase(),ans='';
+ let c=data.checks[data.checks.length-1];
+ if(/pain|hurt|sore arm|elbow|shoulder/.test(l)){ans='If you have pain in your throwing arm, shoulder, or elbow, do not throw. Tell a parent/guardian and coach, and get advice from a qualified healthcare professional. I cannot diagnose pain or decide when you are safe to return.'}
+ else if(/today|plan|workout|schedule/.test(l)){let ss=sessionsForDay(today.getDay());ans=ss.length?'Your plan today: '+ss.map(s=>s.title+' — '+s.details).join('\\n'):'There is no session listed for today. Check with your coach before adding work; a rest day is useful training too.'}
+ else if(/fatigue|tired|recovery|readiness/.test(l)){ans=c?`Your latest check-in (${c.date}): energy ${c.energy}/5, fatigue ${c.fatigue}/5, soreness ${c.soreness}/5, sleep ${c.sleep}, pain: ${c.pain}. `+(c.pain!=='no'?'Do not throw with pain; tell a parent/guardian and coach and seek qualified medical guidance.':(c.fatigue>=4||c.energy<=2||c.soreness>=4||c.sleep==='under6'?'Share this with your coach and parent/guardian and ask them to review your workload.':'Keep to the coach-approved plan; do not add extra throwing.')):'I do not have a check-in saved yet. Open Daily check-in and record how you feel. Share concerning fatigue with your coach and parent/guardian.'}
+ else if(/progress|velo|velocity|stats/.test(l)){let m=data.metrics.slice(-5);ans=m.length?'Your five most recent entries:\\n'+m.map(x=>`${x.date}: ${x.metric} — ${x.value}`).join('\\n'):'No progress entries yet. Open Progress and log a result.'}
+ else if(/mechanic|command|work on|improve/.test(l)){ans='Pick one development focus with your pitching coach, such as repeatable direction, balance, timing, or command. Record a short note after a session about what you worked on. Avoid changing several mechanics at once based only on an app.'}
+ else{ans='I can review your weekly plan, latest check-in, or saved progress. Try asking “What is my plan today?”, “Review my fatigue”, or “Show my progress.” For individualized pitching or medical decisions, involve your coach and parent/guardian.'}
+ setTimeout(()=>addBubble(ans,'bot'),100);
+}
+render();renderCheckSummary();
+</script>
+<script>if ("serviceWorker" in navigator) { window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(() => {})); }</script>
+</body>
+</html>
